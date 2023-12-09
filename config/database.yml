@@ -81,7 +81,7 @@ test:
 #
 production:
   <<: *default
-  url: <%= ENV["MYDATABASE_URL"] %>
+  url: <%= ENV["DATABASE_URL"] %>
   database: contacts_deploy_production
   username: contacts_deploy
   password: <%= ENV["CONTACTS_DEPLOY_DATABASE_PASSWORD"] %>
