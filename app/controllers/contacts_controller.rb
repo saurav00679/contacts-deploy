@@ -7,8 +7,9 @@ class ContactsController < ApplicationController
   def search
     value = params["searchKey"]
 
-    contacts = Contact.where('contact_number ilike ? OR name ilike ?', "%#{value}%", "%#{value}%")
+    combinations = ContactsHelper.get_combinations(value)
 
+    contacts = Contact.where("contact_number ILIKE '%#{value}%' OR name ILIKE '%#{value}%'" + combinations.map { |comb| " OR name ILIKE '%#{comb}%'" }.join(' '))
     render json: contacts
   end
 end
